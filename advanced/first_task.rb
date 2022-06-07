@@ -27,7 +27,7 @@ class CoffeeMachine
 end
 
 
-class CoffeeMachine_pro < CoffeeMachine
+class CoffeeMachinePro < CoffeeMachine
 
   def initialize(power, max_water, max_beans, max_milk_powder)
     super(power, max_water, max_beans)
@@ -76,7 +76,7 @@ class CoffeeMachine_pro < CoffeeMachine
   end
 end
 
-class CoffeeMachine_max < CoffeeMachine
+class CoffeeMachineMax < CoffeeMachine
   def make_coffee(beans, water)
     if @power != true
       puts "machine is off"
@@ -89,7 +89,7 @@ class CoffeeMachine_max < CoffeeMachine
   end
 end
 
-class CoffeeMachine_pro_max < CoffeeMachine
+class CoffeeMachineProMax < CoffeeMachine
 
   def initialize(power, max_water, max_beans)
     super(power, max_water, max_beans)
@@ -120,12 +120,12 @@ end
 first = CoffeeMachine.new(true, 100, 100)
 first.make_coffee
 
-second = CoffeeMachine_pro.new(true, 100, 100,100)
+second = CoffeeMachinePro.new(true, 100, 100, 100)
 second.make_latte
 
-third = CoffeeMachine_max.new(true,100, 100)
+third = CoffeeMachineMax.new(true, 100, 100)
 third.make_coffee(30,50)
 
-fourth = CoffeeMachine_pro_max.new(true,100,100)
+fourth = CoffeeMachineProMax.new(true, 100, 100)
 fourth.temperature(70)
 fourth.make_coffee(30,60)
