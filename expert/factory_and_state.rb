@@ -8,38 +8,68 @@ class Creator #choices
   end
 end
 
+class State
+  attr_reader :state
+  INITIAL = :hot
+
+  def initialize
+    self.state = INITIAL
+  end
+
+  def cold!
+    self.state = :cold
+  end
+
+  private
+  attr_writer :state
+end
+
 # super class for products and showing them state
 class Drinks
   def initialize
-    @freshness = Time.new
-    @tasty = true
+    self.freshness = Time.new
+    self.state = State.new
   end
 
   def take(take)
     if take == 'take'
-      t = Time.new - @freshness
+      t = Time.new - freshness
       if t > 15
-        @tasty = false
+        state.cold!
         puts 'your order is  already cold'
       end
     end
   end
+
+  def cold?
+    state.state == :cold
+  end
+  private
+  attr_accessor :state, :freshness
 end
 
 # class what make a different things(drinks) depending on the cod
 class Coffee < Drinks
   @@busy = false
-  attr_accessor :busy
+
+  def check
+    @@busy != true
+  end
   def make
-    @@busy = true
-    puts ' '.center(20, '$')
-    puts 'wait a second'
-    puts 'making great coffee...'
-    sleep(2)
-    puts 'take coffee please(input - take)'
-    take(gets.chomp)
-    puts
-    @@busy = false
+    if check
+      @@busy = true
+      puts ' '.center(20, '$')
+      puts 'wait a second'
+      puts 'making great coffee...'
+      sleep(2)
+      puts 'take coffee please(input - take)'
+      take(gets.chomp)
+      puts
+      @@busy = false
+    else
+      puts 'class is busy!'
+    end
+
     end
 end
 
